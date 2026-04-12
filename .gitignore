@@ -1,0 +1,16 @@
+# environments
+.venv/
+.idea/
+
+# large data / external repos
+zips/
+calibration/lutpy-main/
+
+
+# python
+__pycache__/
+*.pyc
+
+# jupyter
+.ipynb_checkpoints/
+
