@@ -1,4 +1,3 @@
-import os
 import time
 import datetime
 
@@ -21,32 +20,31 @@ def main():
     start = time.time()
     print("Go!\n")
 
-    input_dir = r'C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\lutpy_main\input\mice export'
+    # Read the optimization data into a dataframe and create permutations of every possible kev combination
 
-    #for filename in os.listdir(input_dir):
-    #if filename.endswith('xlsx'):
-    # den bryr sig inte om filen här, utan den som är i constants?
-    filename = 'nelly_full2.xlsx'
-    #filename = "input_testkarin.xlsx"
-    file_path = os.path.join(input_dir, filename)
-    opt_data_df = get_opt_data(file_path)
+    opt_data_df = get_opt_data()
 
     m, s = get_time(start)
-    print("Importing and formatting optimization_data took", m, "minutes and ", s, "seconds to run",)
+    print(
+        "Importing and formatting optimization_data took",
+        m,
+        "minutes and ",
+        s,
+        "seconds to run",
+    )
 
     # Calculate EAN, RED and SPR for every row in opt_data_df
     rmse_dict = get_spr_optimization(opt_data_df)
     m, s = get_time(start)
 
-
     current_datetime = datetime.datetime.now()
     str_date = current_datetime.strftime("%d-%m-%Y")
-    output_file_name = f"Output\Optimal_energy\Optimal energy {os.path.splitext(filename)[0]} ({str_date}).xlsx"
+    output_file_name = "Output/Optimal_energy/Optimal energy ({}).xlsx".format(str_date)
     write_result(rmse_dict, start, output_file_name)
 
     m, s = get_time(start)
-    print(f"The script finished running for {filename} at", m, "minutes and", s, "seconds")
-    print("All files processed")
+    print("The script finished running at ", m, "minutes and ", s, "seconds")
+
     return
 
 

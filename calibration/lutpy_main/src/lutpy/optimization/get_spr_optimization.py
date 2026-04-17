@@ -58,67 +58,8 @@ def get_spr_optimization(opt_data_df) -> list:
 
     return rmse_dict
 
+
 def get_rmse(opt_data_df):
-    # split data on tissue type
-    opt_data_df_lung, opt_data_df_soft, opt_data_df_bone = split_df_on_tissue_type(
-        opt_data_df
-    )
-
-    # calculate rmse
-    df_rmse_lung = rmse_calculator(opt_data_df_lung)
-    df_rmse_soft = rmse_calculator(opt_data_df_soft)
-    df_rmse_bone = rmse_calculator(opt_data_df_bone)
-
-    # sort based on rmse
-    df_rmse_lung = df_rmse_lung.sort_values(by=con.RMSE)
-    df_rmse_soft = df_rmse_soft.sort_values(by=con.RMSE)
-    df_rmse_bone = df_rmse_bone.sort_values(by=con.RMSE)
-
-    # read reference data set
-    df_rmse_lung_ww = pd.read_excel(
-        open("src/lutpy/resources/woodard_white_energy_pairs.xlsx", "rb"),
-        sheet_name="ww_lung",
-    )
-    df_rmse_soft_ww = pd.read_excel(
-        open("src/lutpy/resources/woodard_white_energy_pairs.xlsx", "rb"),
-        sheet_name="ww_soft",
-    )
-    df_rmse_bone_ww = pd.read_excel(
-        open("src/lutpy/resources/woodard_white_energy_pairs.xlsx", "rb"),
-        sheet_name="ww_bone",
-    )
-
-    # merge reference data with optimization data
-    df_rmse_lung_ww = pd.merge(df_rmse_lung_ww, df_rmse_lung, how="left")
-    df_rmse_soft_ww = pd.merge(df_rmse_soft_ww, df_rmse_soft, how="left")
-    df_rmse_bone_ww = pd.merge(df_rmse_bone_ww, df_rmse_bone, how="left")
-
-    # sort by rmse
-    df_rmse_lung_ww = df_rmse_lung_ww.sort_values(by=con.RMSE).reset_index(drop=True)
-    df_rmse_soft_ww = df_rmse_soft_ww.sort_values(by=con.RMSE).reset_index(drop=True)
-    df_rmse_bone_ww = df_rmse_bone_ww.sort_values(by=con.RMSE).reset_index(drop=True)
-
-    # create a df with the optimal VMI pairs for lung tissue, soft tissue, and bone
-    df_optimal_pairs = pd.DataFrame([
-        df_rmse_lung_ww.loc[0, [con.KEV_LOW, con.KEV_HIGH, con.RMSE]].to_dict(),
-        df_rmse_soft_ww.loc[0, [con.KEV_LOW, con.KEV_HIGH, con.RMSE]].to_dict(),
-        df_rmse_bone_ww.loc[0, [con.KEV_LOW, con.KEV_HIGH, con.RMSE]].to_dict(),
-    ], index=[con.LUNG, con.SOFT, con.BONE])
-
-    # optional: keep tissue type as a normal column instead of index
-    df_optimal_pairs = df_optimal_pairs.reset_index().rename(columns={"index": "tissue_type"})
-
-    rmse_dict = {
-        con.LUNG: df_rmse_lung,
-        con.SOFT: df_rmse_soft,
-        con.BONE: df_rmse_bone,
-        con.LUNG_COMPLIANT_WITH_REF: df_rmse_lung_ww,
-        con.SOFT_COMPLIANT_WITH_REF: df_rmse_soft_ww,
-        con.BONE_COMPLIANT_WITH_REF: df_rmse_bone_ww,
-        con.OPTIMAL_VMI: df_optimal_pairs,
-    }
-    return rmse_dict
-def get_rmse_old(opt_data_df):
 
     # split data on tissue type
     opt_data_df_lung, opt_data_df_soft, opt_data_df_bone = split_df_on_tissue_type(

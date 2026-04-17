@@ -4,8 +4,12 @@
 
 # large data / external repos
 zips/
-calibration/lutpy-main/
-
+calibration/dålig_lutpy_main/
+calibration/**/input/
+calibration/**/output/
+calibration/**/VMIs/
+calibration/**/.idea/
+calibration/**/karins_files/
 
 # python
 __pycache__/
@@ -13,4 +17,3 @@ __pycache__/
 
 # jupyter
 .ipynb_checkpoints/
-

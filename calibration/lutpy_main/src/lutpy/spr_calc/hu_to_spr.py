@@ -130,3 +130,6 @@ def hu_to_spr_3(
     spr = spr_calc(ed, ean, con.N_EXP)
 
     return ean, ed, spr
+if __name__ == "__main__":
+    spr = hu_to_spr_cal(51000, 61000, 0.8010180812370546, 0.5952612884916816)
+    print(spr)

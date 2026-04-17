@@ -1,0 +1,7 @@
+#scripts/test/input
+#scripts/test/output
+VMIs
+input/mono catsim
+.gitignore
+karins_files
+/input/mono ge/ge head/5 mGy/Soft Asir 0/xcat_vmale50/
