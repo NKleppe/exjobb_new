@@ -4,18 +4,25 @@
 
 # large data / external repos
 zips/
+/calibration/bad_lutpy_main/*
+!calibrations/**/create_spr_maps.py
+!calibrations/**/find_optimal_vmi.py
+!calibrations/**/main_nelly.ipynb
+
+/calibration/lutpy_main/
 calibration/bad_lutpy_main/
 calibration/**/input/
 calibration/**/output/
 calibration/**/VMIs/
 calibration/**/.idea/
-calibration/**/karins_files/
-calibration/**/src
-
+!calibration/**/karins_files/
+calibration/**/src/*
+!calibration/**/src/resources/
+calibration/lutpy_main/src/
 # python
 __pycache__/
 *.pyc
 
 # jupyter
 .ipynb_checkpoints/
-/calibration/bad_lutpy_main/
+
