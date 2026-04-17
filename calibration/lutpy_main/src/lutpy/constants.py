@@ -15,11 +15,11 @@ PROTON_ENERGY = 1.60 * 10 ** (-11)  # [J] ( 100 MeV, normal for proton therapy).
 
 # where to find the optimization input data
 #OPT_DATA_FILE_PATH = r"input/mice export/input_testkarin.xlsx"
-OPT_DATA_FILE_PATH = r"input/mice export/nelly_full.xlsx"
-
+OPT_DATA_FILE_PATH = r"input/mice export/nelly_full2.xlsx"
+#OPT_DATA_FILE_PATH = r"input/mice export/input_testkarin.xlsx"
 
 #PHANTOM_REFERENCE_SHEET_FILE_PATH = "src/lutpy/resources/cirs062m.xlsx"
-PHANTOM_REFERENCE_SHEET_FILE_PATH = "src/lutpy/resources/nelly_constants_output.xlsx"
+PHANTOM_REFERENCE_SHEET_FILE_PATH = "src/lutpy/resources/nelly_constants_output2.xlsx"
 
 # the minimum and maximum kev available on the scanner
 KEV_MIN = 40
@@ -32,6 +32,7 @@ KEV_MAX = 140
 
 ### GE Energy Pairs ###
 # Choose the energy pairs (expressed in eV)
+# optimala par
 KEV_LUNG_LOW = 113000
 KEV_LUNG_HIGH = 114000
 KEV_SOFT_LOW = 49000
@@ -40,14 +41,20 @@ KEV_BONE_LOW = 102000
 KEV_BONE_HIGH = 103000
 
 # Name the images that will be imported
-VMI_REF = "74 kev"
-VMI_LUNG_LOW = "113 kev"
-VMI_LUNG_HIGH = "114 kev"
-VMI_SOFT_LOW = "49 kev"
-VMI_SOFT_HIGH = "52 kev"
-VMI_BONE_LOW = "102 kev"
-VMI_BONE_HIGH = "103 kev"
-
+"""VMI_REF = "Mono 74 keV_Series0307"
+VMI_LUNG_LOW = "Mono 113 keV_Series0305"
+VMI_LUNG_HIGH = "Mono 114 keV_Series0306"
+VMI_SOFT_LOW = "Mono 49 keV_Series0301"
+VMI_SOFT_HIGH = "Mono 52 kev_Series0349"
+VMI_BONE_LOW = "Mono 102 keV_Series0303"
+VMI_BONE_HIGH = "Mono 103 keV_Series0304"""
+VMI_REF = "mono 74 kev"
+VMI_LUNG_LOW = "mono 113 kev"
+VMI_LUNG_HIGH = "mono 114 kev"
+VMI_SOFT_LOW = "mono 49 kev"
+VMI_SOFT_HIGH = "mono 52 kev"
+VMI_BONE_LOW = "mono 102 kev"
+VMI_BONE_HIGH = "mono 103 kev"
 
 # Set the boundaries for the segmentation of the image volume
 HU_AIR = -3024

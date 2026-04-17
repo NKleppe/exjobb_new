@@ -3,7 +3,7 @@ from src.lutpy.run import siemens
 from src.lutpy.test.ge_test import ge_test
 from src.lutpy.test.siemens_test import siemens_test
 from src.lutpy.test.sort_siemens import sort_siemens
-
+import dicom_image_tools
 
 
 def main():
@@ -35,7 +35,7 @@ def main():
     '''
     ge_test()
     # ge.ge_ptcog()
-
+    #ge.ge_one_phantom()
     ##################################
     # Siemens
     #################################

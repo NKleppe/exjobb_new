@@ -21,11 +21,13 @@ def main():
     start = time.time()
     print("Go!\n")
 
-    input_dir = r'C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\lutpy-main\input\mice export'
+    input_dir = r'C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\lutpy_main\input\mice export'
 
     #for filename in os.listdir(input_dir):
     #if filename.endswith('xlsx'):
-    filename = 'nelly_test.xlsx'
+    # den bryr sig inte om filen här, utan den som är i constants?
+    filename = 'nelly_full2.xlsx'
+    #filename = "input_testkarin.xlsx"
     file_path = os.path.join(input_dir, filename)
     opt_data_df = get_opt_data(file_path)
 
