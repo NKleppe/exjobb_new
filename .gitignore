@@ -13,12 +13,11 @@ zips/
 calibration/bad_lutpy_main/
 calibration/**/input/
 calibration/**/output/
-calibration/**/VMIs/
 calibration/**/.idea/
 !calibration/**/karins_files/
 calibration/**/src/*
 !calibration/**/src/resources/
-calibration/lutpy_main/src/
+calibration/lutpy_main/src/*
 # python
 __pycache__/
 *.pyc
@@ -26,3 +25,4 @@ __pycache__/
 # jupyter
 .ipynb_checkpoints/
 
+/calibration/lutpy_main/src/
