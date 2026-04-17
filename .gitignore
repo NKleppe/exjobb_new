@@ -4,7 +4,7 @@
 
 # large data / external repos
 zips/
-calibration/dålig_lutpy_main/
+calibration/bad_lutpy_main/
 calibration/**/input/
 calibration/**/output/
 calibration/**/VMIs/
