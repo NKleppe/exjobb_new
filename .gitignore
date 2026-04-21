@@ -12,7 +12,9 @@ zips/
 /calibration/lutpy_main/
 calibration/bad_lutpy_main/
 calibration/**/input/
-calibration/**/output/
+calibration/**/output
+!calibration/**/Optimal_energy
+calibration/**/arkiv
 calibration/**/.idea/
 !calibration/**/karins_files/
 calibration/**/src/*
