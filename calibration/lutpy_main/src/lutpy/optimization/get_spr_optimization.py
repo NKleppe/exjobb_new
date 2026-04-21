@@ -28,6 +28,11 @@ def get_spr_optimization(opt_data_df) -> list:
     pool = mp.Pool(processes=cpus)
     # split data into equal chunks
     opt_data_df_split = np.array_split(opt_data_df, cpus, 0)
+    opt_data_df_split = [
+        opt_data_df.iloc[idx]
+        for idx in np.array_split(np.arange(len(opt_data_df)), cpus)
+    ]
+
     # turn the list of DataFrames to a list of tuples
     data = get_lst_of_tuples_from_df(cpus, opt_data_df_split)
 
@@ -35,7 +40,20 @@ def get_spr_optimization(opt_data_df) -> list:
     # Here we use multiprocessing to speed up the EAN, RED and SPR calculations.
 
     # vectorize the function hu_to_spr_cal
-    hu_to_spr_vectorized = np.vectorize(hu_to_spr_cal)
+    #hu_to_spr_vectorized = np.vectorize(hu_to_spr_cal)
+    hu_to_spr_vectorized = np.vectorize(hu_to_spr_cal, otypes=[float, float, float])
+
+    test = data[0]
+
+    res = hu_to_spr_cal(
+        test[0][0],
+        test[1][0],
+        test[2][0],
+        test[3][0]
+    )
+
+    print("single result:", res)
+    print("types:", type(res[0]), type(res[1]), type(res[2]))
 
     # run the vectorized hu_to_spr_cal with multiprocessing to speed up the calculations
     multi_proc_results = pool.starmap(hu_to_spr_vectorized, data)
@@ -109,12 +127,20 @@ def get_rmse(opt_data_df):
     df_rmse_bone_ww = df_rmse_bone_ww.reset_index(drop=True)
 
     # create a df with the optimal VMI pairs for lung tissue, soft tissue, and bone
-    df_optimal_pairs = df_rmse_lung_ww.loc[0, [con.KEV_LOW, con.KEV_HIGH, con.RMSE]]
+    """df_optimal_pairs = df_rmse_lung_ww.loc[0, [con.KEV_LOW, con.KEV_HIGH, con.RMSE]]
     df_optimal_pairs = df_optimal_pairs.append(
         df_rmse_soft_ww.loc[0, [con.KEV_LOW, con.KEV_HIGH, con.RMSE]]
     )
     df_optimal_pairs = df_optimal_pairs.append(
         df_rmse_bone_ww.loc[0, [con.KEV_LOW, con.KEV_HIGH, con.RMSE]]
+    )"""
+    df_optimal_pairs = pd.concat(
+        [
+            df_rmse_lung_ww.loc[[0], [con.KEV_LOW, con.KEV_HIGH, con.RMSE]],
+            df_rmse_soft_ww.loc[[0], [con.KEV_LOW, con.KEV_HIGH, con.RMSE]],
+            df_rmse_bone_ww.loc[[0], [con.KEV_LOW, con.KEV_HIGH, con.RMSE]],
+        ],
+        ignore_index=True,
     )
 
     # store the DataFrames in a dict

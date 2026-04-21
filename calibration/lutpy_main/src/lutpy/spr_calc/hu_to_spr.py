@@ -3,7 +3,7 @@ from src.lutpy.spr_calc.ed_solver import ed_calc
 from src.lutpy.spr_calc.spr_calculator import spr_calc
 
 from src.lutpy import constants as con
-
+import numpy as np
 
 def hu_to_spr(
         hu_low: float,
@@ -86,6 +86,10 @@ def hu_to_spr_cal(
     ean = ean_solv(mu_low, mu_high, kev_low, kev_high)
     ed = ed_calc(mu_low, mu_high, ean, kev_low, kev_high)
     spr = spr_calc(ed, ean)
+
+    ean = float(np.asarray(ean).squeeze())
+    ed = float(np.asarray(ed).squeeze())
+    spr = float(np.asarray(spr).squeeze())
 
     return ean, ed, spr
 
