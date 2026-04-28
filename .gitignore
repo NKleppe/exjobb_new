@@ -23,7 +23,8 @@ calibration/lutpy_main/src/*
 # python
 __pycache__/
 *.pyc
-
+*.dcm
+*.mat
 # jupyter
 .ipynb_checkpoints/
 
