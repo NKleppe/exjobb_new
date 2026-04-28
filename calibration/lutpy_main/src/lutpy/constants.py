@@ -15,7 +15,9 @@ PROTON_ENERGY = 1.60 * 10 ** (-11)  # [J] ( 100 MeV, normal for proton therapy).
 
 # where to find the optimization input data
 #OPT_DATA_FILE_PATH = r"input/mice export/input_iungo_all_final.xlsx"
-OPT_DATA_FILE_PATH = "input/mice export/nelly_full_vols.xlsx"
+#OPT_DATA_FILE_PATH = "input/mice export/nelly_full_vols.xlsx"
+OPT_DATA_FILE_PATH = "input/mice export/nelly_full_test_qnoise.xlsx"
+
 
 PHANTOM_REFERENCE_SHEET_FILE_PATH = "src/lutpy/resources/gammex_new_karin_truth_modifierade_namn.xlsx"
 #PHANTOM_REFERENCE_SHEET_FILE_PATH = r"C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\lutpy_main\src\lutpy\resources\nelly_schneider_gammex.xlsx"
