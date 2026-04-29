@@ -17,8 +17,21 @@ def rescale_image(image_volume: np.ndarray):
     # rescale_slope = (np.max(image_volume) - np.min(image_volume)) / 2 ** 16
 
     # image_volume = (image_volume - rescale_intercept) / rescale_slope
+
+    print(type(image_volume))
+    print(image_volume.dtype)
+    print(image_volume.shape)
+    print(type(image_volume.flat[0]))
+
+
     rescale_intercept = 0
     rescale_slope = 1
+
+    # Ändrat Nelly 29/4 2026
+    image_volume = np.asarray(image_volume, dtype=np.float64)
+    image_volume = np.nan_to_num(image_volume, nan=0.0, posinf=0.0, neginf=0.0)
+
+
     image_volume = (image_volume*1000-1000)
     image_volume = np.rint(image_volume)
     image_volume = image_volume.astype(np.int16)
