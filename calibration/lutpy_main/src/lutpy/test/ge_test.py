@@ -21,7 +21,8 @@ def ge_test():
     print("Go!\n")
 
     #root_dir = r"input/mono ge/ge head"
-    root_dir = r"input/mono catsim/catsim head"
+    root_dir = r"input/mono catsim (51&61)/catsim head"
+    #root_dir = r"input/mono catsim/body2"
     #root_dir = r"karins_files/input/mono catsim/catsim head"
 
     # inititera ett tomt look-up-table

@@ -1,7 +1,7 @@
 from src.lutpy import constants as con
 
 
-def get_data_for_mp_spr_calc(cpus: int, df_temp_split) -> list:
+def get_data_for_mp_spr_calc_old(cpus: int, df_temp_split) -> list:
     """
     This function splits the dataframe into a number of chunks equal to the variable cpus.
     :return: list
@@ -18,6 +18,27 @@ def get_data_for_mp_spr_calc(cpus: int, df_temp_split) -> list:
                 df_temp_split[cpu][con.KEV_HIGH],
                 df_temp_split[cpu][con.MU_LOW],
                 df_temp_split[cpu][con.MU_HIGH],
+            )
+        )
+
+    return list_of_chunks
+
+
+def get_data_for_mp_spr_calc(cpus: int, df_temp_split) -> list:
+    list_of_chunks = []
+
+    for cpu in range(cpus):
+        chunk = df_temp_split[cpu]
+
+        list_of_chunks.append(
+            (
+                chunk[con.HU_LOW].to_numpy(),
+                chunk[con.HU_HIGH].to_numpy(),
+                con.N_EXP,
+                chunk[con.KEV_LOW].to_numpy(),
+                chunk[con.KEV_HIGH].to_numpy(),
+                chunk[con.MU_LOW].to_numpy(),
+                chunk[con.MU_HIGH].to_numpy(),
             )
         )
 

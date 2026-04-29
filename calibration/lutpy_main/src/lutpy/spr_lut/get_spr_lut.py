@@ -6,6 +6,38 @@ from src.lutpy import constants as con
 from src.lutpy.spr_calc.hu_to_spr import hu_to_spr
 from src.lutpy.spr_lut.get_data_for_mp_spr_calc import get_data_for_mp_spr_calc
 
+def hu_to_spr_chunk(
+    hu_low,
+    hu_high,
+    n_exp,
+    kev_low,
+    kev_high,
+    mu_low,
+    mu_high,
+):
+    results = []
+
+    for h_low, h_high, k_low, k_high, m_low, m_high in zip(
+        hu_low,
+        hu_high,
+        kev_low,
+        kev_high,
+        mu_low,
+        mu_high,
+    ):
+        spr = hu_to_spr(
+            h_low,
+            h_high,
+            n_exp,
+            k_low,
+            k_high,
+            m_low,
+            m_high,
+        )
+
+        results.append(spr)
+
+    return results
 
 def get_spr_lut(image_dict: dict, spr_lut) -> list:
     """
@@ -87,22 +119,48 @@ def get_spr_lut(image_dict: dict, spr_lut) -> list:
     if df_temp.shape[0] == 0:
         return df_temp.to_numpy()
 
-    pool = mp.Pool(processes=cpus)
+    #pool = mp.Pool(processes=cpus)
 
-    df_temp_split = np.array_split(df_temp, cpus, 0)
+    #df_temp_split = np.array_split(df_temp, cpus, 0)
+    df_temp_split = [
+        df_temp.iloc[start:end]
+        for start, end in zip(
+            np.linspace(0, len(df_temp), cpus, endpoint=False, dtype=int),
+            np.linspace(0, len(df_temp), cpus + 1, dtype=int)[1:]
+        )
+    ]
+    """hu_to_spr_vectorized = np.vectorize(hu_to_spr)
 
-    hu_to_spr_vectorized = np.vectorize(hu_to_spr)
+
 
     data = get_data_for_mp_spr_calc(cpus, df_temp_split)
 
     multi_proc_results = pool.starmap(
         hu_to_spr_vectorized,
         data
-    )
+    )"""
+    data = get_data_for_mp_spr_calc(cpus, df_temp_split)
+
+    """    multi_proc_results = pool.starmap(
+        hu_to_spr_chunk,
+        data
+    )"""
+
+    with mp.Pool(processes=cpus) as pool:
+        multi_proc_results = pool.starmap(
+            hu_to_spr_chunk,
+            data
+        )
+
+
+    #df_temp[con.SPR] = [item for sublist in multi_proc_results for item in sublist]
+
+    #df_temp[con.SPR][df_temp[con.SPR] < 0.0000001] = 0
 
     df_temp[con.SPR] = [item for sublist in multi_proc_results for item in sublist]
 
-    df_temp[con.SPR][df_temp[con.SPR] < 0.0000001] = 0
+    df_temp.loc[df_temp[con.SPR] < 0.0000001, con.SPR] = 0
+
     # If spr_lut contains more than the initial all-zero row, do not keep any duplicates.
 
     # TODO: this drop_duplicates in probably not necessary

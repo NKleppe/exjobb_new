@@ -34,22 +34,32 @@ KEV_MAX = 140
 
 ### GE Energy Pairs ###
 # Choose the energy pairs (expressed in eV)
-KEV_LUNG_LOW = 135000
-KEV_LUNG_HIGH = 136000
-KEV_SOFT_LOW = 46000
-KEV_SOFT_HIGH = 55000
-KEV_BONE_LOW = 82000
-KEV_BONE_HIGH = 103000
+KEV_LUNG_LOW = 115000
+KEV_LUNG_HIGH = 116000
+KEV_SOFT_LOW = 51000
+KEV_SOFT_HIGH = 52000
+KEV_BONE_LOW = 50000
+KEV_BONE_HIGH = 64000
+
 
 # Name the images that will be imported
+"""VMI_REF = "74 kev"
+VMI_LUNG_LOW = "115 kev"
+VMI_LUNG_HIGH = "116 kev"
+VMI_SOFT_LOW = "51 kev"
+VMI_SOFT_HIGH = "52 kev"
+VMI_BONE_LOW = "50 kev"
+VMI_BONE_HIGH = "64 kev"""
+
+
+# karins catsim head
 VMI_REF = "74 kev"
 VMI_LUNG_LOW = "135 kev"
 VMI_LUNG_HIGH = "136 kev"
 VMI_SOFT_LOW = "46 kev"
-VMI_SOFT_HIGH = "55 kev"
-VMI_BONE_LOW = "82 kev"
-VMI_BONE_HIGH = "103 kev"
-
+VMI_SOFT_HIGH = "51 kev"
+VMI_BONE_LOW = "55 kev"
+VMI_BONE_HIGH = "61 kev"
 
 # Set the boundaries for the segmentation of the image volume
 HU_AIR = -3024
