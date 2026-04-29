@@ -12,6 +12,7 @@ path_in = r'C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\bilder\70_b
 path_in = r'C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\bilder\70_head4'
 path_in = r"C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\matfiles\head4\265528_040408\70"
 path_in = r'C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\matfiles\body2\260227_220418\70'
+path_in = r'C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\matfiles\body3\260427_230435\70'
 
 filename = "im.000" + str(slice)+".dcm"
 save_filename = "slice"+str(slice)+"_"+str(path_in[-5:])+".png"

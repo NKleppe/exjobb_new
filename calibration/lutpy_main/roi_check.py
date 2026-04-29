@@ -9,16 +9,16 @@ from gecatsim.pyfiles.GetMu import GetMu
 mat_folder = r"C:\Users\Nelly Kleppe\PycharmProjects\exjobb\calibration\matfiles"
 
 files = [
-    "body1_262124_170423.mat",
-    "body2_261924_180401.mat",
-    "body3_261624_190434.mat",
-    "body4_261424_200435.mat",
-    "body5_261224_210410.mat",
-    "head1_260224_220453.mat",
-    "head2_265324_220441.mat",
-    "head3_264424_230421.mat",
-    "head4_263425_000435.mat",
-    "head5_262525_010414.mat",
+    "body1_265927_200419.mat",
+    "body2_260227_220418.mat",
+    "body3_260427_230435.mat",
+    "body4_260728_000402.mat",
+    "body5_260928_010451.mat",
+    "head1_260628_020405.mat",
+    "head2_260228_030426.mat",
+    "head3_265828_030443.mat",
+    "head4_265528_040408.mat",
+    "head5_265128_050412.mat"
 ]
 
 kev = 74
@@ -62,8 +62,8 @@ def get_HU(file_path):
         pe = 10 * np.array(f["Image_PE"])
         pvc = 10 * np.array(f["Image_PVC"])
 
-    pe = np.flipud(pe)[slice_idx]
-    pvc = np.flipud(pvc)[slice_idx]
+    pe = pe[slice_idx]
+    pvc = pvc[slice_idx]
 
     mu_pe = GetMu("polyethylene", kev)[0]
     mu_pvc = GetMu("pvc_legacy", kev)[0]
@@ -97,10 +97,7 @@ for file in files:
 #%%
 # plot one body and one head
 
-plot_files = [
-    "body1_262124_170423.mat",
-    "head1_260224_220453.mat",
-]
+plot_files = [files[0], files[6]]
 
 for file in plot_files:
     HU = get_HU(os.path.join(mat_folder, file))
